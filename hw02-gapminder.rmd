@@ -1,0 +1,20 @@
+---
+title: "hw02-gapminder"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+What is gapminder, anyway?
+```{r}
+?gapminder
+summary(gapminder)
+```
+
