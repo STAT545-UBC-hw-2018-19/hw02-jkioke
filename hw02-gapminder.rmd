@@ -12,9 +12,46 @@ library(gapminder)
 library(tidyverse)
 ```
 
-What is gapminder, anyway?
+##What is Gapminder, anyway?
 ```{r}
-?gapminder
+class(gapminder)
+```
+Gapminder is a data frame, so it should have numerous variables arranged in unique columns that each have the same number of rows.
+```{r}
 summary(gapminder)
+nrow(gapminder)
+```
+
+The **6** columns in the Gapminder data frame are
+
+ - Country (country)
+ - Continent (continent)
+ - Year (year)
+ - Life Expectancy (lifeExp)
+ - Population (pop)
+ - GDP per Capita (gdpPercap)
+ 
+There are **1704** observations for each variable, and so 1704 rows.Each variable is a list of either categorical (country, continent) or quantitative (pop, lifeExp) values.
+
+##Exploring Gapminder
+
+####Categorical
+Looking at the Continent column, we can see there are only a few unique values this variable can take:
+```{r}
+cont <- select(gapminder, continent)
+unique(cont)
+```
+The histogram below provides a summary of the distribution of values throughout the "continent" column. 
+```{r}
+ggplot(gapminder, aes(continent)) +
+  stat_count()
+```
+
+####Quantitative
+GDP per Capita is fairly different from the Continent variable, as it can assume any number within a certain range. In the table below we can see the minimum value of GDP per capita is $241.20, the maximum is $113,523.10
+
+```{r}
+select(gapminder, gdpPercap) %>% 
+  summary()
 ```
 
