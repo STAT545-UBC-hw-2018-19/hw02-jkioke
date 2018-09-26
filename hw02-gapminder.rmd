@@ -48,10 +48,35 @@ ggplot(gapminder, aes(continent)) +
 ```
 
 ####Quantitative
-GDP per Capita is fairly different from the Continent variable, as it can assume any number within a certain range. In the table below we can see the minimum value of GDP per capita is $241.20, the maximum is $113,523.10
+GDP per Capita is fairly different from the Continent variable, as it can assume any number within a certain range. In the table below we can see the minimum value of GDP per capita is $241.20, the maximum is $113,523.10. The mean GDP per Capita is $7215.30, which is much closer to the minimum than the maximum (75% of the data is below $9325.5).
 
 ```{r}
 select(gapminder, gdpPercap) %>% 
   summary()
+```
+
+The density plot below visualizes the distribution of GDP per Capita.
+```{r}
+ggplot(gapminder, aes(gdpPercap)) +
+  geom_density()
+```
+
+####Filter
+Would how would the plot change if we only look at observations from Europe?
+```{r}
+gapminder %>% 
+  filter(continent == "Europe") %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_density()
+```
+
+
+
+####What might the GDP per Capita look like for different continents?
+
+```{r}
+ggplot(gapminder, aes(gdpPercap)) +
+  geom_histogram() +
+  facet_wrap( ~ continent)
 ```
 

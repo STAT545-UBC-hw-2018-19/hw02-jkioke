@@ -6,14 +6,14 @@ library(gapminder)
 library(tidyverse)
 ```
 
-    ## -- Attaching packages ------------------ tidyverse 1.2.1 --
+    ## -- Attaching packages -------------------------------------------- tidyverse 1.2.1 --
 
     ## v ggplot2 3.0.0     v purrr   0.2.5
     ## v tibble  1.4.2     v dplyr   0.7.6
-    ## v tidyr   0.8.1     v stringr 1.3.1
+    ## v tidyr   0.8.1     v stringr 1.3.0
     ## v readr   1.1.1     v forcats 0.3.0
 
-    ## -- Conflicts --------------------- tidyverse_conflicts() --
+    ## -- Conflicts ----------------------------------------------- tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -98,7 +98,7 @@ ggplot(gapminder, aes(continent)) +
 
 #### Quantitative
 
-GDP per Capita is fairly different from the Continent variable, as it can assume any number within a certain range. In the table below we can see the minimum value of GDP per capita is $241.20, the maximum is $113,523.10
+GDP per Capita is fairly different from the Continent variable, as it can assume any number within a certain range. In the table below we can see the minimum value of GDP per capita is $241.20, the maximum is $113,523.10. The mean GDP per Capita is $7215.30, which is much closer to the minimum than the maximum (75% of the data is below $9325.5).
 
 ``` r
 select(gapminder, gdpPercap) %>% 
@@ -112,3 +112,37 @@ select(gapminder, gdpPercap) %>%
     ##  Mean   :  7215.3  
     ##  3rd Qu.:  9325.5  
     ##  Max.   :113523.1
+
+The density plot below visualizes the distribution of GDP per Capita.
+
+``` r
+ggplot(gapminder, aes(gdpPercap)) +
+  geom_density()
+```
+
+![](hw02-gapminder_files/figure-markdown_github/unnamed-chunk-7-1.png)
+
+#### Filter
+
+Would how would the plot change if we only look at observations from Europe?
+
+``` r
+gapminder %>% 
+  filter(continent == "Europe") %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_density()
+```
+
+![](hw02-gapminder_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+#### What might the GDP per Capita look like for different continents?
+
+``` r
+ggplot(gapminder, aes(gdpPercap)) +
+  geom_histogram() +
+  facet_wrap( ~ continent)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+![](hw02-gapminder_files/figure-markdown_github/unnamed-chunk-9-1.png)
