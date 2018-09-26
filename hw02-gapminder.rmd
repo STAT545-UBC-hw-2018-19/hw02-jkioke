@@ -80,3 +80,27 @@ ggplot(gapminder, aes(gdpPercap)) +
   facet_wrap( ~ continent)
 ```
 
+##Scatterplot
+Please enjoy this miscellaneous scatterplot of Life Expectancy vs. Population!
+```{r}
+ggplot(gapminder, aes(lifeExp, pop)) +
+  geom_point()
+```
+
+
+##Doing More
+
+
+The following is a valid way to isolate the data pertaining to Afghanistan and Rwanda.
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+You could then pipe the Rwanda/Afghanistan data into a plot, though there are only 12 points.
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan")) %>% 
+  ggplot(aes(lifeExp, gdpPercap)) + 
+  geom_point()
+```
+
+
+
